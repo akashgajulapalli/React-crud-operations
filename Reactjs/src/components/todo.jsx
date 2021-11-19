@@ -10,14 +10,25 @@ class Todo extends Component {
                 {task:"Wash", status:"Do" },
                 {task:"Eat", status:"Do" }
             ],
-            addTask:""
+            task:"",
+            status:""
+
          }
     }
     handleChange = (e) => {
-        this.setState({
-            addTask: e.target.value
-        })
-    }
+        console.log(e.target);
+        if(e.target.name === "newTask"){
+            this.setState({
+                task: e.target.value
+            })
+        }
+        else if(e.target.name === "newStatus"){
+            this.setState({
+                status: e.target.value
+            })
+        }
+
+            }
     handleClick = (obj) => {
         let arr1 = [...this.state.users];
         const filtered = arr1.filter((item) => {
@@ -27,19 +38,12 @@ class Todo extends Component {
             users: filtered
         })                   
     }
-    // handleClick1 = (obj) => {
-    //     let arr1 =[...this.state.users];
-    //     const updated = arr1.map((item) => {
-    //         return {
-    //             task: item.task, 
-    //             status: (item.task === obj.task ) ? "Done" : "Do"
-    //         }
-    //     })
-    //     this.setState({
-    //         users: updated 
-    //     })
-
-    // }
+    handleClick1 = (obj) => {
+        let arr1 =[...this.state.users];
+        console.log(obj);
+        
+        
+    }
     handleClick2 = () => {
         let newObj = {
             task:this.state.addTask,
@@ -51,10 +55,13 @@ class Todo extends Component {
         })
     }
     render() { 
-        const { addTask , users } = this.state;
-        console.log(addTask);
+        const { task , users ,status } = this.state;
         return ( <div>
-            <input type="text" defaultValue={ addTask } name="newTask" onChange={this.handleChange} />
+            <label htmlFor="newTask">Task</label>
+            <input type="text" defaultValue={ task } name="newTask" onChange={this.handleChange} />
+            <label htmlFor="newStatus">Status</label>
+            <input type="text" defaultValue={ status } name="newStatus" onChange={this.handleChange} />
+
             <button onClick={this.handleClick2}>Add Task</button>
 
             <table>
